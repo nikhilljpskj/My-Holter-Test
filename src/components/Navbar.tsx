@@ -2,7 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ButtonLink } from "./ButtonLink";
-import { navItems, reportAccessUrl } from "@/data/site";
+import { navItems } from "@/data/site";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -27,14 +27,7 @@ export function Navbar() {
         </nav>
 
         <div className="nav-cta">
-          <ButtonLink
-            href={reportAccessUrl}
-            target="_blank"
-            rel="noreferrer"
-            variant="secondary"
-          >
-            Access Patient Report
-          </ButtonLink>
+          <ButtonLink href="/#schedule">Schedule a Holter Test</ButtonLink>
         </div>
 
         <button
@@ -60,14 +53,8 @@ export function Navbar() {
               {item.label}
             </NavLink>
           ))}
-          <ButtonLink
-            href={reportAccessUrl}
-            target="_blank"
-            rel="noreferrer"
-            variant="secondary"
-            className="w-full"
-          >
-            Access Patient Report
+          <ButtonLink href="/#schedule" className="w-full">
+            Schedule a Holter Test
           </ButtonLink>
         </div>
       ) : null}

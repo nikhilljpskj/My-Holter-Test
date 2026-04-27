@@ -56,6 +56,10 @@ textarea {
   font: inherit;
 }
 
+select {
+  font: inherit;
+}
+
 .container {
   width: min(1160px, calc(100% - 32px));
   margin: 0 auto;
@@ -134,12 +138,21 @@ textarea {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.68), rgba(15, 23, 42, 0.28)),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.86), rgba(15, 23, 42, 0.54), rgba(15, 23, 42, 0.14)),
     url("/hero-bg.png") center / cover no-repeat;
+}
+
+.hero::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.36));
+  pointer-events: none;
 }
 
 .hero-content {
   position: relative;
+  z-index: 1;
   display: grid;
   min-height: calc(100vh - 78px);
   grid-template-columns: minmax(0, 1.1fr) 420px;
@@ -150,6 +163,7 @@ textarea {
 
 .hero-copy {
   max-width: 760px;
+  padding: 28px 0;
 }
 
 .hero-kicker,
@@ -216,7 +230,12 @@ h3 {
 
 .hero-copy > p:not(.hero-kicker) {
   max-width: 660px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 2px 18px rgba(15, 23, 42, 0.36);
+}
+
+.hero-copy h1 {
+  text-shadow: 0 4px 28px rgba(15, 23, 42, 0.42);
 }
 
 .hero-actions,
@@ -225,6 +244,12 @@ h3 {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 30px;
+}
+
+.hero-primary-cta {
+  min-height: 54px;
+  padding-inline: 24px;
+  font-size: 16px;
 }
 
 .trust-row {
@@ -246,7 +271,7 @@ h3 {
 .hero-card {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.36);
   padding: 26px;
   box-shadow: var(--shadow);
   backdrop-filter: blur(20px);
@@ -355,6 +380,7 @@ h3 {
 .hospital-card,
 .story-panel,
 .contact-form,
+.booking-form,
 .contact-panel,
 .access-card {
   border: 1px solid rgba(226, 232, 240, 0.9);
@@ -645,7 +671,56 @@ h3 {
   align-items: start;
 }
 
+.booking-section {
+  background:
+    linear-gradient(135deg, rgba(239, 246, 255, 0.9), rgba(255, 255, 255, 1)),
+    radial-gradient(circle at 80% 15%, rgba(225, 29, 72, 0.08), transparent 26rem);
+  scroll-margin-top: 88px;
+}
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.booking-copy {
+  position: sticky;
+  top: 110px;
+}
+
+.booking-copy h2 {
+  color: var(--ink);
+}
+
+.booking-copy p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.booking-points {
+  display: grid;
+  gap: 12px;
+  margin: 26px 0;
+}
+
+.booking-points span {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #334155;
+  font-weight: 800;
+}
+
+.booking-points svg {
+  color: #16a34a;
+  flex: 0 0 auto;
+}
+
 .contact-form,
+.booking-form,
 .contact-panel {
   padding: 28px;
 }
@@ -656,12 +731,14 @@ h3 {
   gap: 16px;
 }
 
-.contact-form {
+.contact-form,
+.booking-form {
   display: grid;
   gap: 18px;
 }
 
-.contact-form label {
+.contact-form label,
+.booking-form label {
   display: grid;
   gap: 8px;
   color: var(--ink);
@@ -670,7 +747,10 @@ h3 {
 }
 
 .contact-form input,
-.contact-form textarea {
+.contact-form textarea,
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -684,9 +764,54 @@ h3 {
 }
 
 .contact-form input:focus,
-.contact-form textarea:focus {
+.contact-form textarea:focus,
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
   border-color: var(--sky);
   box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.14);
+}
+
+.booking-form {
+  border-color: rgba(2, 132, 199, 0.18);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.1);
+}
+
+.booking-form-header {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+}
+
+.booking-form-header span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--soft-blue);
+  color: var(--sky-dark);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.booking-form-header h2 {
+  margin-top: 16px;
+  font-size: clamp(28px, 3vw, 38px);
+}
+
+.booking-form-header p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.booking-submit {
+  min-height: 54px;
+  background: var(--rose);
+}
+
+.booking-submit:hover:not(:disabled) {
+  background: #be123c;
 }
 
 .submit-button {
@@ -893,6 +1018,7 @@ h3 {
   .access-grid,
   .contact-grid,
   .story-grid,
+  .booking-layout,
   .cta-panel {
     grid-template-columns: 1fr;
   }
@@ -940,7 +1066,7 @@ h3 {
 
   .hero-bg {
     background:
-      linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.76)),
+      linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.68)),
       url("/hero-bg.png") center / cover no-repeat;
   }
 
@@ -983,6 +1109,14 @@ h3 {
   .footer-grid,
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-copy {
+    position: static;
   }
 
   .service-card {

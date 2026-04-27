@@ -1,10 +1,10 @@
-import { ArrowRight, FileHeart } from "lucide-react";
+import { ArrowRight, CalendarCheck2 } from "lucide-react";
 import { ButtonLink } from "./ButtonLink";
-import { contact, reportAccessUrl } from "@/data/site";
+import { contact } from "@/data/site";
 
 export function CTA({
   title = "Ready to arrange a Holter monitoring test?",
-  description = "Speak with our team for patient scheduling, hospital partnership, or report access support.",
+  description = "Speak with our team for patient scheduling, hospital partnership, or cardiac monitoring support.",
 }: {
   title?: string;
   description?: string;
@@ -19,16 +19,11 @@ export function CTA({
             <p>{description}</p>
           </div>
           <div className="cta-actions">
-            <ButtonLink href={contact.whatsapp} target="_blank" rel="noreferrer">
-              Book a Test <ArrowRight size={18} />
+            <ButtonLink href="/#schedule">
+              <CalendarCheck2 size={18} /> Schedule a Holter Test
             </ButtonLink>
-            <ButtonLink
-              href={reportAccessUrl}
-              target="_blank"
-              rel="noreferrer"
-              variant="outline"
-            >
-              <FileHeart size={18} /> Access Patient Report
+            <ButtonLink href={contact.whatsapp} target="_blank" rel="noreferrer" variant="outline">
+              WhatsApp the Team <ArrowRight size={18} />
             </ButtonLink>
           </div>
         </div>
