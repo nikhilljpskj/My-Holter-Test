@@ -8,7 +8,9 @@ import Home from "@/pages/Home";
 import Hospitals from "@/pages/Hospitals";
 import NotFound from "@/pages/NotFound";
 import PatientAccess from "@/pages/PatientAccess";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Services from "@/pages/Services";
+import TermsAndConditions from "@/pages/TermsAndConditions";
 
 export default function App() {
   return (
@@ -23,6 +25,8 @@ export default function App() {
             <Route path="/book" element={<Book />} />
             <Route path="/patient-access" element={<PatientAccess />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

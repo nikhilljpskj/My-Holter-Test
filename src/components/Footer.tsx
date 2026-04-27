@@ -1,6 +1,24 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
-import { contact, navItems, reportAccessUrl } from "@/data/site";
+import { contact, reportAccessUrl } from "@/data/site";
+
+const companyLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Hospitals", href: "/hospitals" },
+  { label: "Contact", href: "/contact" },
+];
+
+const serviceLinks = [
+  { label: "Services", href: "/services" },
+  { label: "Book Test", href: "/book" },
+  { label: "Patient Access", href: "/patient-access" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
+];
 
 export function Footer() {
   return (
@@ -15,9 +33,20 @@ export function Footer() {
         </div>
 
         <div>
-          <h3>Pages</h3>
+          <h3>Company</h3>
           <div className="footer-links">
-            {navItems.map((item) => (
+            {companyLinks.map((item) => (
+              <Link key={item.href} to={item.href}>
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3>Services</h3>
+          <div className="footer-links">
+            {serviceLinks.map((item) => (
               <Link key={item.href} to={item.href}>
                 {item.label}
               </Link>
@@ -25,6 +54,11 @@ export function Footer() {
             <a href={reportAccessUrl} target="_blank" rel="noreferrer">
               Report System
             </a>
+            {legalLinks.map((item) => (
+              <Link key={item.href} to={item.href}>
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
 

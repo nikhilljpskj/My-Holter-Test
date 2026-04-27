@@ -990,8 +990,8 @@ h3 {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 0.7fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.35fr 0.7fr 0.85fr 1.1fr;
+  gap: 34px;
 }
 
 .footer-logo {
@@ -1017,6 +1017,30 @@ h3 {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.legal-content {
+  max-width: 860px;
+}
+
+.legal-content h2 {
+  margin-top: 34px;
+  font-size: 26px;
+}
+
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.legal-content a {
+  color: var(--sky-dark);
+  font-weight: 800;
 }
 
 .footer-bottom {
