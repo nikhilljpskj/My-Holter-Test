@@ -3,7 +3,7 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { CTA } from "@/components/CTA";
 import { SEO } from "@/components/SEO";
 import { Section } from "@/components/Section";
-import { contact, services } from "@/data/site";
+import { services } from "@/data/site";
 
 const symptoms = [
   "Palpitations or racing heartbeat",
@@ -29,7 +29,7 @@ export default function Services() {
     <>
       <SEO
         title="Holter and ECG Monitoring Services"
-        description="Explore Holter monitoring, cardiac monitoring, ECG monitoring services, and remote patient monitoring support for patients and hospitals."
+        description="Explore Holter monitoring services, ECG monitoring tests, 24 hour Holter test support, and cardiac monitoring for arrhythmia detection."
         path="/services"
         schema={{
           "@context": "https://schema.org",
@@ -45,13 +45,39 @@ export default function Services() {
           <p className="eyebrow">Services</p>
           <h1>Holter monitoring and ECG services for better rhythm visibility.</h1>
           <p>
-            We support continuous cardiac monitoring for patients whose symptoms
-            may not appear during a brief ECG. The service is built for
-            convenience, clinical clarity, and fast coordination.
+            We support holter monitoring services for patients whose symptoms
+            may not appear during a brief ECG. Book a 24 hour Holter test, 48
+            hour ECG test, or home-based cardiac monitoring request with a
+            workflow built for convenience and clinical clarity.
           </p>
-          <ButtonLink href={contact.whatsapp} target="_blank" rel="noreferrer">
-            Book on WhatsApp
+          <ButtonLink to="/book">
+            Book Holter Test Online
           </ButtonLink>
+        </div>
+      </section>
+
+      <section className="section section-tight">
+        <div className="container seo-copy-card reveal">
+          <h2>Holter monitoring for accurate heart rhythm monitoring</h2>
+          <p>
+            Holter monitoring is a non-invasive cardiac test that continuously
+            records the heart's electrical activity for 24 to 48 hours, helping
+            detect irregular heart rhythms (arrhythmias) and cardiac
+            abnormalities. Patients can wear a portable ECG device during daily
+            activities to capture real-time heart data, improving diagnosis
+            accuracy compared to standard ECG tests.
+          </p>
+          <p>
+            This ambulatory ECG monitoring approach supports arrhythmia
+            detection, cardiac diagnostics, ECG test for irregular heartbeat
+            evaluation, and 24 hour ECG monitoring at home when available.
+          </p>
+          <div className="inline-actions">
+            <ButtonLink to="/book">Schedule ECG Monitoring Test</ButtonLink>
+            <ButtonLink to="/contact" variant="outline">
+              Contact Our Team
+            </ButtonLink>
+          </div>
         </div>
       </section>
 

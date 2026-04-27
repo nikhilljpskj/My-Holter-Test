@@ -13,6 +13,7 @@ const serviceLinks = [
   { label: "Services", href: "/services" },
   { label: "Book Test", href: "/book" },
   { label: "Patient Access", href: "/patient-access" },
+  { label: "Holter Guide", href: "/blog/what-is-holter-monitoring" },
 ];
 
 const legalLinks = [
@@ -25,7 +26,12 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div>
-          <img src="/myholtertest.svg" alt="My Holter Test" className="footer-logo" />
+          <img
+            src="/myholtertest.svg"
+            alt="Heart rhythm monitoring device"
+            className="footer-logo"
+            loading="lazy"
+          />
           <p>
             Premium Holter monitoring, ECG monitoring services, and remote
             patient monitoring support for hospitals, doctors, and patients.

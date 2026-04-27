@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTA } from "@/components/CTA";
+import { FAQSection } from "@/components/FAQSection";
 import { SEO } from "@/components/SEO";
 import { Section } from "@/components/Section";
 import {
@@ -20,34 +21,41 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Holter Monitoring and Cardiac Diagnostics"
-        description="Book premium Holter monitoring, ECG monitoring services, and remote patient monitoring support for heart rhythm diagnostics across South India."
+        title="Holter Test Booking Online | 24/48 Hour ECG Monitoring Services"
+        description="Book Holter test online with advanced cardiac monitoring services. 24-hour and 48-hour ECG monitoring for accurate heart rhythm diagnosis at home or hospitals."
         path="/"
         schema={{
           "@context": "https://schema.org",
-          "@type": "MedicalService",
+          "@type": "MedicalBusiness",
           name: "My Holter Test",
-          serviceType: "Holter monitoring",
-          areaServed: "South India",
-          provider: {
-            "@type": "MedicalBusiness",
-            name: "Redeemer Technologies",
+          description: "Online Holter test booking and ECG monitoring services",
+          medicalSpecialty: "Cardiology",
+          areaServed: "India",
+          availableService: {
+            "@type": "MedicalTest",
+            name: "Holter Monitoring",
+            description:
+              "24-48 hour ECG monitoring for detecting arrhythmias and heart rhythm issues",
           },
         }}
       />
 
       <section className="hero">
-        <div className="hero-bg" aria-hidden="true" />
+        <div
+          className="hero-bg"
+          role="img"
+          aria-label="Patient wearing portable ECG Holter monitor"
+        />
         <div className="container hero-content">
           <div className="hero-copy reveal">
             <p className="hero-kicker">
               <HeartPulse size={18} /> Advanced cardiac monitoring, made simpler
             </p>
-            <h1>Holter monitoring for clearer heart rhythm decisions.</h1>
+            <h1>Advanced Holter Monitoring & ECG Test Booking Online</h1>
             <p>
-              My Holter Test helps patients, doctors, and hospitals arrange
-              continuous ECG monitoring with professional setup, smooth report
-              coordination, and dependable support across South India.
+              Accurate 24/48-hour cardiac monitoring services available at
+              hospitals and home. Detect irregular heart rhythms with trusted
+              Holter testing solutions.
             </p>
             <div className="hero-actions">
               <ButtonLink to="/book" className="hero-primary-cta">
@@ -100,8 +108,8 @@ export default function Home() {
 
       <Section
         eyebrow="Why My Holter Test"
-        title="A cleaner path from symptom to cardiac insight"
-        description="Designed for patients who need convenient testing and clinicians who need organized rhythm data without operational friction."
+        title="A cleaner path from symptoms to cardiac diagnostics"
+        description="Designed for patients who need holter test booking online, ECG at home service options, and clinically useful heart rhythm monitoring without operational friction."
       >
         <div className="card-grid four">
           {features.map((feature) => (
@@ -116,8 +124,8 @@ export default function Home() {
 
       <Section
         eyebrow="Services"
-        title="Cardiac monitoring services built around real workflows"
-        description="From doorstep ECG setup to report coordination, every step is structured for clarity and patient comfort."
+        title="Holter monitoring services built around real workflows"
+        description="From 24 hour Holter test setup to report coordination, every ECG monitoring test step is structured for clarity, comfort, and arrhythmia detection support."
         className="section-muted"
       >
         <div className="card-grid two">
@@ -130,6 +138,22 @@ export default function Home() {
               </div>
             </article>
           ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="Local SEO"
+        title="Holter test booking near you"
+        description="Looking for Holter test booking near you? Our platform connects patients with trusted hospitals and diagnostic centers offering ECG monitoring services across major cities in India, including home-based cardiac monitoring options."
+      >
+        <div className="seo-copy-card reveal">
+          <p>
+            Patients searching for ECG test near me, affordable Holter test cost
+            India, or 24 hour ECG monitoring at home can use My Holter Test to
+            request support for cardiac diagnostics, ambulatory ECG monitoring,
+            and ECG test for irregular heartbeat evaluation.
+          </p>
+          <ButtonLink to="/book">Book Holter Test Online</ButtonLink>
         </div>
       </Section>
 
@@ -147,6 +171,43 @@ export default function Home() {
                 <span>{item.role}</span>
               </footer>
             </blockquote>
+          ))}
+        </div>
+      </Section>
+
+      <FAQSection />
+
+      <Section
+        eyebrow="Guides"
+        title="Holter monitoring blog suggestions"
+        description="Helpful education pages for patients comparing ECG monitoring, Holter monitoring, and cardiac monitoring options."
+        className="section-muted"
+      >
+        <div className="card-grid three">
+          {[
+            {
+              title: "What is Holter Monitoring?",
+              href: "/blog/what-is-holter-monitoring",
+              text: "Learn how wearable heart rhythm monitoring works over 24 to 48 hours.",
+            },
+            {
+              title: "ECG vs Holter Test",
+              href: "/blog/ecg-vs-holter-test",
+              text: "Understand when a standard ECG is enough and when ambulatory ECG monitoring helps.",
+            },
+            {
+              title: "When should you take a Holter test?",
+              href: "/blog/when-should-you-take-a-holter-test",
+              text: "Review common symptoms such as palpitations, dizziness, and irregular heartbeat.",
+            },
+          ].map((post) => (
+            <article className="feature-card reveal" key={post.href}>
+              <h3>{post.title}</h3>
+              <p>{post.text}</p>
+              <ButtonLink to={post.href} variant="outline">
+                Read guide
+              </ButtonLink>
+            </article>
           ))}
         </div>
       </Section>

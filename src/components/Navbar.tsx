@@ -11,7 +11,10 @@ export function Navbar() {
     <header className="site-header">
       <div className="container nav-shell">
         <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
-          <img src="/myholtertest.svg" alt="My Holter Test" />
+          <img
+            src="/myholtertest.svg"
+            alt="Holter monitoring ECG device for cardiac testing"
+          />
         </NavLink>
 
         <nav className="desktop-nav" aria-label="Main navigation">

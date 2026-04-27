@@ -460,6 +460,60 @@ h3 {
   color: var(--muted);
 }
 
+.seo-copy-card {
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: clamp(24px, 4vw, 38px);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.06);
+}
+
+.seo-copy-card h2 {
+  margin-bottom: 14px;
+}
+
+.seo-copy-card p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.faq-card {
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 24px;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.05);
+}
+
+.faq-card h3 {
+  font-size: 19px;
+}
+
+.faq-card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.faq-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
 .cta-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -1144,6 +1198,7 @@ h3 {
   .stats-grid,
   .testimonial-grid,
   .assurance-grid,
+  .faq-grid,
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1217,9 +1272,19 @@ h3 {
   .hospital-grid,
   .city-grid,
   .assurance-grid,
+  .faq-grid,
   .footer-grid,
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .inline-actions {
+    flex-direction: column;
+  }
+
+  .inline-actions a,
+  .faq-cta a {
+    width: 100%;
   }
 
   .booking-form,

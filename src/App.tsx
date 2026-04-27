@@ -2,6 +2,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import About from "@/pages/About";
+import BlogArticle from "@/pages/BlogArticle";
 import Book from "@/pages/Book";
 import Contact from "@/pages/Contact";
 import Home from "@/pages/Home";
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/blog/:slug" element={<BlogArticle />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

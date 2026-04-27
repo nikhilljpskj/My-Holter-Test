@@ -27,7 +27,10 @@ export default function Book() {
         path="/book"
       />
 
-      <section className="booking-hero">
+      <section
+        className="booking-hero"
+        aria-label="Holter monitoring ECG device for cardiac testing"
+      >
         <div className="container booking-page-layout">
           <div className="booking-page-copy reveal">
             <p className="hero-kicker">
