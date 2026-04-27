@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://holtertest.in/</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://myholtertest.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://holtertest.in/about</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://myholtertest.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://holtertest.in/holter-test</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://myholtertest.com/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://holtertest.in/doorstep-test</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://myholtertest.com/hospitals</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://holtertest.in/hospital-collaboration</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://myholtertest.com/patient-access</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://holtertest.in/contact</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://myholtertest.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
