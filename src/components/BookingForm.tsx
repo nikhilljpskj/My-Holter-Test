@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { AlertCircle, CalendarCheck2, CheckCircle2 } from "lucide-react";
+import { isValidEmail, sendFormData } from "@/utils/api";
 
 type BookingFormState = {
   name: string;
@@ -29,11 +30,6 @@ const initialForm: BookingFormState = {
   message: "",
 };
 
-const recipients = [
-  { email: "nikhiljp.skj@gmail.com" },
-  { email: "info@redeemertechnologies.com" },
-];
-
 export function BookingForm() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
@@ -46,77 +42,36 @@ export function BookingForm() {
     setStatus("submitting");
     setError("");
 
-    const apiKey = import.meta.env.VITE_BREVO_API_KEY;
-    const senderEmail =
-      import.meta.env.VITE_BREVO_SENDER_EMAIL ?? "info@redeemertechnologies.com";
-
-    if (!apiKey) {
+    if (!form.name.trim() || !form.email.trim() || !form.mobile.trim()) {
       setStatus("error");
-      setError("Brevo is not configured. Add VITE_BREVO_API_KEY to the frontend environment.");
+      setError("Something went wrong");
       return;
     }
 
-    const structuredData = {
-      type: "Holter test booking request",
-      source: "My Holter Test homepage booking form",
-      submittedAt: new Date().toISOString(),
-      ...form,
-    };
-
-    const htmlContent = `
-      <div style="font-family:Inter,Arial,sans-serif;color:#0f172a;line-height:1.6">
-        <h2 style="margin:0 0 12px;color:#0369a1">New Holter Test Booking Request</h2>
-        ${renderRow("Name", form.name)}
-        ${renderRow("Email", form.email)}
-        ${renderRow("Mobile", form.mobile)}
-        ${renderRow("Hospital Name", form.hospitalName)}
-        ${renderRow("Doctor Name", form.doctorName)}
-        ${renderRow("Number of Days", form.numberOfDays)}
-        ${renderRow("Preferred Date", form.preferredDate)}
-        ${renderRow("Preferred Time", form.preferredTime)}
-        ${renderRow("City / Location", form.location)}
-        <p><strong>Health Issues:</strong></p>
-        <p>${escapeHtml(form.healthIssues).replace(/\n/g, "<br />")}</p>
-        <p><strong>Message:</strong></p>
-        <p>${escapeHtml(form.message).replace(/\n/g, "<br />")}</p>
-        <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0" />
-        <h3 style="margin:0 0 8px">JSON structured data</h3>
-        <pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;white-space:pre-wrap">${escapeHtml(
-          JSON.stringify(structuredData, null, 2),
-        )}</pre>
-      </div>
-    `;
+    if (!isValidEmail(form.email)) {
+      setStatus("error");
+      setError("Something went wrong");
+      return;
+    }
 
     try {
-      const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": apiKey,
-        },
-        body: JSON.stringify({
-          sender: { name: "My Holter Test Booking", email: senderEmail },
-          to: recipients,
-          replyTo: { email: form.email, name: form.name },
-          subject: `Schedule Holter Test: ${form.name}`,
-          htmlContent,
-          textContent: JSON.stringify(structuredData, null, 2),
-        }),
+      await sendFormData({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
+        hospital: form.hospitalName.trim(),
+        doctor: form.doctorName.trim(),
+        days: form.numberOfDays.trim(),
+        health_issue: form.healthIssues.trim(),
+        message: buildBookingMessage(form),
       });
-
-      if (!response.ok) {
-        throw new Error(`Brevo returned ${response.status}`);
-      }
 
       setForm(initialForm);
       setStatus("success");
     } catch (submitError) {
+      console.error("Booking form submission failed:", submitError);
       setStatus("error");
-      setError(
-        submitError instanceof Error
-          ? submitError.message
-          : "Unable to send your booking request right now.",
-      );
+      setError("Something went wrong");
     }
   }
 
@@ -265,7 +220,7 @@ export function BookingForm() {
 
       {status === "success" ? (
         <div className="form-alert success" role="status">
-          <CheckCircle2 size={18} /> Booking request sent. Our team will contact you shortly.
+          <CheckCircle2 size={18} /> Request submitted successfully
         </div>
       ) : null}
 
@@ -276,26 +231,20 @@ export function BookingForm() {
       ) : null}
 
       <button className="submit-button booking-submit" disabled={status === "submitting"} type="submit">
-        {status === "submitting" ? "Scheduling..." : "Schedule a Holter Test"}
+        {status === "submitting" ? "Sending..." : "Schedule a Holter Test"}
         <CalendarCheck2 size={18} />
       </button>
     </form>
   );
 }
 
-function renderRow(label: string, value: string) {
-  return `<p><strong>${label}:</strong> ${escapeHtml(value || "Not provided")}</p>`;
-}
+function buildBookingMessage(form: BookingFormState) {
+  const details = [
+    form.message.trim(),
+    form.preferredDate ? `Preferred date: ${form.preferredDate}` : "",
+    form.preferredTime ? `Preferred time: ${form.preferredTime}` : "",
+    form.location.trim() ? `City / Location: ${form.location.trim()}` : "",
+  ].filter(Boolean);
 
-function escapeHtml(value: string) {
-  return value.replace(/[&<>"']/g, (character) => {
-    const entities: Record<string, string> = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;",
-    };
-    return entities[character];
-  });
+  return details.join("\n");
 }

@@ -1,24 +1,20 @@
 import { FormEvent, useState } from "react";
 import { AlertCircle, CheckCircle2, Send } from "lucide-react";
+import { isValidEmail, sendFormData } from "@/utils/api";
 
 type FormState = {
   name: string;
   email: string;
-  phone: string;
+  mobile: string;
   message: string;
 };
 
 const initialForm: FormState = {
   name: "",
   email: "",
-  phone: "",
+  mobile: "",
   message: "",
 };
-
-const recipients = [
-  { email: "nikhiljp.skj@gmail.com" },
-  { email: "info@redeemertechnologies.com" },
-];
 
 export function ContactForm() {
   const [form, setForm] = useState(initialForm);
@@ -32,68 +28,36 @@ export function ContactForm() {
     setStatus("submitting");
     setError("");
 
-    const apiKey = import.meta.env.VITE_BREVO_API_KEY;
-    const senderEmail =
-      import.meta.env.VITE_BREVO_SENDER_EMAIL ?? "info@redeemertechnologies.com";
-
-    if (!apiKey) {
+    if (!form.name.trim() || !form.email.trim() || !form.mobile.trim()) {
       setStatus("error");
-      setError("Brevo is not configured. Add VITE_BREVO_API_KEY to the frontend environment.");
+      setError("Something went wrong");
       return;
     }
 
-    const structuredData = {
-      source: "My Holter Test website",
-      submittedAt: new Date().toISOString(),
-      ...form,
-    };
-
-    const htmlContent = `
-      <div style="font-family:Inter,Arial,sans-serif;color:#0f172a;line-height:1.6">
-        <h2 style="margin:0 0 12px;color:#0369a1">New My Holter Test inquiry</h2>
-        <p><strong>Name:</strong> ${escapeHtml(form.name)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(form.email)}</p>
-        <p><strong>Phone:</strong> ${escapeHtml(form.phone)}</p>
-        <p><strong>Message:</strong></p>
-        <p>${escapeHtml(form.message).replace(/\n/g, "<br />")}</p>
-        <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0" />
-        <h3 style="margin:0 0 8px">JSON structured data</h3>
-        <pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;white-space:pre-wrap">${escapeHtml(
-          JSON.stringify(structuredData, null, 2),
-        )}</pre>
-      </div>
-    `;
+    if (!isValidEmail(form.email)) {
+      setStatus("error");
+      setError("Something went wrong");
+      return;
+    }
 
     try {
-      const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": apiKey,
-        },
-        body: JSON.stringify({
-          sender: { name: "My Holter Test Website", email: senderEmail },
-          to: recipients,
-          replyTo: { email: form.email, name: form.name },
-          subject: `New Holter monitoring inquiry from ${form.name}`,
-          htmlContent,
-          textContent: JSON.stringify(structuredData, null, 2),
-        }),
+      await sendFormData({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        mobile: form.mobile.trim(),
+        hospital: "",
+        doctor: "",
+        days: "",
+        health_issue: "",
+        message: form.message.trim(),
       });
-
-      if (!response.ok) {
-        throw new Error(`Brevo returned ${response.status}`);
-      }
 
       setForm(initialForm);
       setStatus("success");
     } catch (submitError) {
+      console.error("Contact form submission failed:", submitError);
       setStatus("error");
-      setError(
-        submitError instanceof Error
-          ? submitError.message
-          : "Unable to send your message right now.",
-      );
+      setError("Something went wrong");
     }
   }
 
@@ -124,13 +88,13 @@ export function ContactForm() {
       </div>
 
       <label>
-        Phone
+        Mobile
         <input
           required
           type="tel"
           autoComplete="tel"
-          value={form.phone}
-          onChange={(event) => setForm({ ...form, phone: event.target.value })}
+          value={form.mobile}
+          onChange={(event) => setForm({ ...form, mobile: event.target.value })}
           placeholder="+91 98765 43210"
         />
       </label>
@@ -148,7 +112,7 @@ export function ContactForm() {
 
       {status === "success" ? (
         <div className="form-alert success" role="status">
-          <CheckCircle2 size={18} /> Message sent. Our team will get back to you shortly.
+          <CheckCircle2 size={18} /> Request submitted successfully
         </div>
       ) : null}
 
@@ -163,17 +127,4 @@ export function ContactForm() {
       </button>
     </form>
   );
-}
-
-function escapeHtml(value: string) {
-  return value.replace(/[&<>"']/g, (character) => {
-    const entities: Record<string, string> = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;",
-    };
-    return entities[character];
-  });
 }
