@@ -5,13 +5,11 @@ import {
   HeartPulse,
   ShieldCheck,
 } from "lucide-react";
-import { BookingForm } from "@/components/BookingForm";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTA } from "@/components/CTA";
 import { SEO } from "@/components/SEO";
 import { Section } from "@/components/Section";
 import {
-  contact,
   features,
   services,
   stats,
@@ -52,7 +50,7 @@ export default function Home() {
               coordination, and dependable support across South India.
             </p>
             <div className="hero-actions">
-              <ButtonLink href="#schedule" className="hero-primary-cta">
+              <ButtonLink to="/book" className="hero-primary-cta">
                 <CalendarCheck2 size={18} /> Schedule a Holter Test
               </ButtonLink>
               <ButtonLink to="/services" variant="outline">
@@ -97,35 +95,6 @@ export default function Home() {
               <span>{stat.label}</span>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section id="schedule" className="section booking-section">
-        <div className="container booking-layout">
-          <div className="booking-copy reveal">
-            <p className="eyebrow">Fast scheduling</p>
-            <h2>Book a convenient Holter test appointment.</h2>
-            <p>
-              Use this dedicated booking form for patient appointments,
-              referral coordination, hospital-based setup, or doorstep Holter
-              monitoring requests.
-            </p>
-            <div className="booking-points">
-              <span>
-                <CheckCircle2 size={18} /> Call-back for confirmation
-              </span>
-              <span>
-                <CheckCircle2 size={18} /> Doctor and hospital details captured
-              </span>
-              <span>
-                <CheckCircle2 size={18} /> Health issues shared with the team
-              </span>
-            </div>
-            <ButtonLink href={contact.whatsapp} target="_blank" rel="noreferrer" variant="outline">
-              Need urgent help? WhatsApp us
-            </ButtonLink>
-          </div>
-          <BookingForm />
         </div>
       </section>
 

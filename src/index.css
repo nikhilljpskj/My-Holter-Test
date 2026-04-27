@@ -218,6 +218,7 @@ h3 {
 
 .hero-copy > p:not(.hero-kicker),
 .page-hero p,
+.booking-page-copy p,
 .section-heading p,
 .story-copy p,
 .cta-panel p,
@@ -671,52 +672,117 @@ h3 {
   align-items: start;
 }
 
-.booking-section {
+.booking-hero {
   background:
-    linear-gradient(135deg, rgba(239, 246, 255, 0.9), rgba(255, 255, 255, 1)),
-    radial-gradient(circle at 80% 15%, rgba(225, 29, 72, 0.08), transparent 26rem);
-  scroll-margin-top: 88px;
+    linear-gradient(120deg, rgba(15, 23, 42, 0.94), rgba(3, 105, 161, 0.76)),
+    url("/hero-bg.png") center / cover no-repeat;
+  color: #ffffff;
+  padding: 82px 0 92px;
 }
 
-.booking-layout {
+.booking-page-layout {
   display: grid;
-  grid-template-columns: 0.82fr 1.18fr;
-  gap: 34px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  gap: clamp(28px, 5vw, 58px);
   align-items: start;
 }
 
-.booking-copy {
+.booking-page-copy {
   position: sticky;
-  top: 110px;
+  top: 112px;
+  padding-top: 18px;
 }
 
-.booking-copy h2 {
-  color: var(--ink);
+.booking-page-copy h1 {
+  color: #ffffff;
+  font-size: clamp(42px, 6vw, 68px);
+  text-shadow: 0 4px 28px rgba(15, 23, 42, 0.36);
 }
 
-.booking-copy p {
-  color: var(--muted);
-  font-size: 18px;
-  line-height: 1.75;
+.booking-page-copy p {
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.82);
 }
 
-.booking-points {
+.booking-benefit-list {
   display: grid;
   gap: 12px;
-  margin: 26px 0;
+  margin: 28px 0;
 }
 
-.booking-points span {
+.booking-benefit-list span {
   display: flex;
   gap: 10px;
-  align-items: center;
-  color: #334155;
-  font-weight: 800;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 700;
 }
 
-.booking-points svg {
-  color: #16a34a;
+.booking-benefit-list svg {
+  color: #bae6fd;
   flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.booking-support-card {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 560px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 18px;
+  backdrop-filter: blur(16px);
+}
+
+.booking-support-card > div {
+  display: grid;
+  gap: 4px;
+}
+
+.booking-support-card svg {
+  color: #bae6fd;
+}
+
+.booking-support-card p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.booking-form-wrap .booking-form {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.booking-assurance {
+  background: #ffffff;
+}
+
+.assurance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.assurance-grid article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+  padding: 24px;
+}
+
+.assurance-grid svg {
+  color: var(--sky);
+}
+
+.assurance-grid h3 {
+  margin-top: 16px;
+}
+
+.assurance-grid p {
+  color: var(--muted);
+  line-height: 1.65;
 }
 
 .contact-form,
@@ -743,7 +809,7 @@ h3 {
   gap: 8px;
   color: var(--ink);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 650;
 }
 
 .contact-form input,
@@ -757,10 +823,19 @@ h3 {
   background: #ffffff;
   color: var(--ink);
   padding: 13px 14px;
+  font-weight: 500;
   outline: none;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder,
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
 }
 
 .contact-form input:focus,
@@ -791,7 +866,7 @@ h3 {
   color: var(--sky-dark);
   padding: 8px 12px;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .booking-form-header h2 {
@@ -1018,9 +1093,17 @@ h3 {
   .access-grid,
   .contact-grid,
   .story-grid,
-  .booking-layout,
+  .booking-page-layout,
   .cta-panel {
     grid-template-columns: 1fr;
+  }
+
+  .booking-page-copy {
+    position: static;
+  }
+
+  .booking-page-copy p {
+    max-width: none;
   }
 
   .hero-card {
@@ -1036,6 +1119,7 @@ h3 {
 
   .stats-grid,
   .testimonial-grid,
+  .assurance-grid,
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1083,7 +1167,8 @@ h3 {
   }
 
   .page-hero,
-  .access-page {
+  .access-page,
+  .booking-hero {
     padding: 72px 0 58px;
   }
 
@@ -1094,7 +1179,8 @@ h3 {
 
   .hero-actions a,
   .cta-actions a,
-  .page-hero a {
+  .page-hero a,
+  .booking-support-card a {
     width: 100%;
   }
 
@@ -1106,17 +1192,25 @@ h3 {
   .symptom-grid,
   .hospital-grid,
   .city-grid,
+  .assurance-grid,
   .footer-grid,
   .form-grid {
     grid-template-columns: 1fr;
   }
 
-  .booking-layout {
-    grid-template-columns: 1fr;
+  .booking-form,
+  .contact-form,
+  .contact-panel {
+    padding: 20px;
   }
 
-  .booking-copy {
-    position: static;
+  .booking-form-header h2 {
+    font-size: 26px;
+  }
+
+  .booking-support-card {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .service-card {

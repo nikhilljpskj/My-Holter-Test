@@ -27,7 +27,7 @@ export function Navbar() {
         </nav>
 
         <div className="nav-cta">
-          <ButtonLink href="/#schedule">Schedule a Holter Test</ButtonLink>
+          <ButtonLink to="/book">Schedule a Holter Test</ButtonLink>
         </div>
 
         <button
@@ -53,7 +53,7 @@ export function Navbar() {
               {item.label}
             </NavLink>
           ))}
-          <ButtonLink href="/#schedule" className="w-full">
+          <ButtonLink to="/book" className="w-full">
             Schedule a Holter Test
           </ButtonLink>
         </div>

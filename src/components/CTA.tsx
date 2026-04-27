@@ -19,7 +19,7 @@ export function CTA({
             <p>{description}</p>
           </div>
           <div className="cta-actions">
-            <ButtonLink href="/#schedule">
+            <ButtonLink to="/book">
               <CalendarCheck2 size={18} /> Schedule a Holter Test
             </ButtonLink>
             <ButtonLink href={contact.whatsapp} target="_blank" rel="noreferrer" variant="outline">
